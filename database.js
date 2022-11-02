@@ -1,11 +1,15 @@
 /*
     Since we aren't using an external database for this exercise, 
-    a db array is initalized to hold our transaction objects
+    a db array is initalized to hold a record of our transactions 
+    and current points balances
 
 */
 
-//initialize array to hold our transactions
-let db = []
+//initialize object to hold our transactions and balances
+let db = {
+    transactions : [],
+    balances: []
+}
 
 
 

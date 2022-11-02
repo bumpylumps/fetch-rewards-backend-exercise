@@ -9,10 +9,10 @@ const transactionApiController = require('../controllers/transactionApi')
 //connect routes to controller 
 
 //route for adding transactions
-router.post('/api/addTransaction', transactionApiController.addTransaction);
+router.post('/addTransaction', transactionApiController.addTransaction);
 
 //route for spending points
-router.put('/api/spendPoints', transactionApiController.spendPoints);
+router.post('/api/spendPoints', transactionApiController.spendPoints);
 
 //route for getting point balances
 router.get('/getBalance', transactionApiController.getBalance);
