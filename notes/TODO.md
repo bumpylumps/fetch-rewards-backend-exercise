@@ -3,7 +3,7 @@
 ## Getting started: 
     1) Init git, link repo
     2) Init node
-    3) Init express
+    3) Install express, nodemon
     4) mkdir control
     5) mkdir model
     6) mkdir routes
@@ -15,6 +15,7 @@
     12) touch transaction model
     13) touch LICENSE.md (MIT) 
     14) mkdir images <-- for User instructions in README.md
+    15) Init gitignore (for node modules)
 
 
 # Meat
