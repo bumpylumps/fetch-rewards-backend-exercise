@@ -13,6 +13,8 @@
     10) touch api routes
     11) touch api controller
     12) touch transaction model
+    13) touch LICENSE.md (MIT) 
+    14) mkdir images <-- for User instructions in README.md
 
 
 # Meat
@@ -57,7 +59,7 @@
 
 ## Docs
     1) Init README if git doesn't
-    2) List tech used
+    2) List tech used, license
     3) Describe build process
     4) User Instructions <-- with pic snips
     5) Optimizations
