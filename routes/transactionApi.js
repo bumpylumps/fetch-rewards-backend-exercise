@@ -12,7 +12,7 @@ const transactionApiController = require('../controllers/transactionApi')
 router.post('/addTransaction', transactionApiController.addTransaction);
 
 //route for spending points
-router.post('/api/spendPoints', transactionApiController.spendPoints);
+router.post('/spendPoints', transactionApiController.spendPoints);
 
 //route for getting point balances
 router.get('/getBalance', transactionApiController.getBalance);

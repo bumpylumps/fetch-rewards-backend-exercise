@@ -3,6 +3,7 @@
 const Transaction = require('../model/Transaction');
 //get transaction data from database
 const db = require('../database');
+const { patch } = require('../routes/transactionApi');
 
 //export required functions for route
 module.exports = { 
@@ -63,19 +64,81 @@ module.exports = {
     spendPoints : async(req, res) => {
         //try subtracting points from request
         try {
+        
+        //declare variable for points for easy access
+        let points = req.body.points
+
         //intialize record for spending transactions
+        let withdrawals = []
+        
         //get transactions array, declare as variable
+        //copy and sort transactions array by timestamp
+        let sortedTransactions = db.transactions.slice().sort((a,b) => a.timestamp - b.timestamp)
+        
         //get balances array, declare as variable
-        //sort transactions array by timestamp
-        //check if subtracting points from first transaction would make payer negative
-        //if it does, subtract payer balance from request total, set payer balance to 0, and push transaction to transactions array and spending transactions array
-        //if it doesn't, subtract req points total from payer balance, add transaction to transaction array and spending transactions array
-        //if request total is above 0, move on to next payer in balance array and repeat above steps until total is 0
+        let balances = db.balances;
+        
+        
+        //initalize iterator to travel sortedTransactions
+        let i = 0; 
+
+       
+        
+        //while points are greater than 0
+        while(points >= 0 && i <= sortedTransactions.length -1){
+
+        //declare variable to find payer in balance array
+        let balancePayer = db.balances.find(balance => balance.payer === sortedTransactions[i].payer) 
+        
+        //check if points are less than current sortedTransaction
+        if(points < sortedTransactions[i].points){
+            
+            //if yes
+            //add new transaction for the withdrawal
+            const withdrawal = new Transaction(sortedTransactions[i].payer, (0-points))
+            
+            //subtract points from balancePayer
+            balancePayer.points -= points
+            
+            //push transaction to withdrawal array
+            withdrawals.push(withdrawal)
+            
+            //push transaction to db.transactions array
+            db.transactions.push(withdrawal)
+            
+            //set points to 0
+            points = 0
+            
+            //end loop 
+            break;
+        } else {
+        //subtract points from earliest transaction in sortedTransactions
+        points -= sortedTransactions[i].points
+        
+        //and subtract transaction points from parallel balance payer
+        balancePayer.points -= sortedTransactions[i].points;
+        
+        //create new Transaction
+        const withdrawal = new Transaction(sortedTransactions[i].payer, (0-sortedTransactions[i].points))
+        
+        //push to current transactions
+        withdrawals.push(withdrawal)
+        
+        //push to db transactions
+        db.transactions.push(withdrawal)
+        
+        //increment i
+        i++
+        }
+    }
+        
+        
 
         //when total request points is 0, respond with spending transactions array
-        
-        console.log('Success')
-         //if there's an error, return and console.log(err)
+        res.json(withdrawals)
+        //console.log(db.transactions)
+        console.log(db.transactions)
+        //if there's an error, return and console.log(err)
         } catch(err) {
             console.log(err);
         }
@@ -85,7 +148,7 @@ module.exports = {
     getBalance : async(req, res) => {
         //try getting balance array from db
         try {
-        //initalize object to push balances to
+        //initalize array to push balances to
         let finalBalance = []
         
         //loop through balance array and push payers and points to balances array
@@ -94,15 +157,15 @@ module.exports = {
         }
 
        //convert finalBalance array into properly formatted Object
-       //Assign map of finalBalance into an object with the proper key: value pairs
+       //Assign map of finalBalance to an object with the proper key:value pairs
         finalBalance = Object.assign({}, ...finalBalance.map(key => ({[key[0]]:key[1]})))
 
         //respond with finalBalance object
         res.json(finalBalance);
 
        //if there's an error, return and console.log(err)
-    } catch(err) {
-        console.log(err);
-    }
+        } catch(err) {
+            console.log(err);
+        }
     }
 }
