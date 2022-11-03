@@ -6,7 +6,7 @@ const router = express.Router();
 const transactionApiController = require('../controllers/transactionApi')
 
 
-//connect routes to controller 
+/* connect routes to controller */
 
 //route for adding transactions
 router.post('/addTransaction', transactionApiController.addTransaction);

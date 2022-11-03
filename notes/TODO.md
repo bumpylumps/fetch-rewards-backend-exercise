@@ -63,6 +63,38 @@
     2) List tech used, license
     3) Describe build process
     4) User Instructions <-- with pic snips
+        - GET REPO
+            - go to https://github.com/bumpylumps/fetch-rewards-backend-exercise
+            - click on fork (in the upper right portion of the screen) to clone repo into your github
+            - on your forked repo, click on the green code dropdown menu
+            - copy the given url
+        - open up your text editor of choice
+        - navigate to the folder you would like to hold the repository in
+        - once in the proper folder, enter git clone https://github.com/bumpylumps/fetch-rewards-backend-exercise.git into  the terminal
+        - when that's finished downloading, enter npm install into the terminal to get the necessary dependencies
+        - once that's finished installing, enter npm start into the terminal
+        - open up postman <-- provide link if needed
+        - ADD TRANSACTION 
+            -in postman, use first tab to add transactions to db
+            - set url tab to post
+            - use http://localhost:8000/api/addTransaction for address
+            - go to body tab
+            - click on raw item and use dropdown to set body to json format
+            - provide proper object to body {"payer" : <string>, "points": <int>}
+            - click send and recieve response object
+        - GET BALANCES
+            - in postman, open a new tab
+            - set url tab to get
+            - use http://localhost:8000/api/getBalance for address
+            - click send and recieve response object (balances)
+        - SPEND POINTS
+            - in postman, open a new tab
+            - set url tab to post
+            - use http://localhost:8000/api/spendPoints for address
+            - go to body tab
+            - click on raw item and use dropdown to set body to json format
+            - provide proper object to body {"points": <int>}
+            - click on send and recieve body object
     5) Optimizations
     6) Learned while building
     7) Plugs + Thank you
