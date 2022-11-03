@@ -1,16 +1,18 @@
 //import dependencies
 //get Transaction class from model dir
 const Transaction = require('../model/Transaction');
+
+
 //get transaction data from database
 const db = require('../database');
-const { patch } = require('../routes/transactionApi');
+const { transactions } = require('../database');
 
 //export required functions for route
 module.exports = { 
     //add transaction function
     addTransaction : async(req,res) => {
 
-        try {
+        try{
 
         /*Normally edge cases for the request body would be handled by our DB schema, 
         but since we don't have an external DB to connect to, 
@@ -59,89 +61,101 @@ module.exports = {
             console.log(err)
         }
     }, 
+    
+    spendPoints : async(req,res) => {
 
-    //add spend points function
-    spendPoints : async(req, res) => {
-        //try subtracting points from request
-        try {
-        
-        //declare variable for points for easy access
-        let points = req.body.points
+        //get total points to spend from request
+        let total = req.body.points
 
-        //intialize record for spending transactions
-        let withdrawals = []
-        
-        //get transactions array, declare as variable
-        //copy and sort transactions array by timestamp
+        //declare array for transactions
+        let withdrawals = []  
+
+        //sort transactions array by timestamp
         let sortedTransactions = db.transactions.slice().sort((a,b) => a.timestamp - b.timestamp)
         
-        //get balances array, declare as variable
-        let balances = db.balances;
-        
-        
-        //initalize iterator to travel sortedTransactions
-        let i = 0; 
+        //loop through transactions to collect withdrawals from payers
+        for(let i = 0; i < sortedTransactions.length; i++){
 
+            //if total is smaller than transaction points
+            if(total < sortedTransactions[i].points){
+            //push new transaction to withdrawals
+                withdrawals.push(new Transaction(sortedTransactions[i].payer, (0 - total)))
+            //set total to 0
+                total = 0; 
+            //end loop
+                break;
+            //if total is larger than transaction points
+            } else if(total > sortedTransactions[i].points){
+            //push new transaction to withdrawals
+                withdrawals.push(new Transaction(sortedTransactions[i].payer, (0 - sortedTransactions[i].points)))
+            //subtract transaction points from total
+                total -= sortedTransactions[i].points
+            } 
+
+            //end loop if total === 0
+            if(total <= 0){
+                break;
+            }
+        }
+
+        //set array to combine transactions with same payers
+        let finalValues = []
+
+        //loop through withdrawals, push payers and points to new array
+       for(let i =0; i < withdrawals.length; i++){
+        //look for payer in finalValues array
+        let found = finalValues.find(balance => balance.payer === withdrawals[i].payer)
+        //if they exist in there,     
+        if(found){
+        //increment their points by withdarwals[i]'s points
+                found.points += withdrawals[i].points
+            } else {  
+        //if they aren't in there, push payer and points to finalValues array
+                finalValues.push({"payer" : withdrawals[i].payer, "points" :  withdrawals[i].points})
+
+            }
+       }
+
+       //subtract balances from db.balances array
+       //error object to send if balance is not in db
+         const noRecordErr = {
+            "Error" : "no record of balance found in db"
+        }
+        
+       //error object to send if balances too low
+        const noBalanceErr = {
+            "Error" : "not enough points in balance for withdrawal"
+        }
+
+       //get balances
+       let balances = db.balances
+       //loop through final values
+       finalValues.forEach(transaction => {
+        let found = balances.find(balance => balance.payer === transaction.payer)
+        
+        if(!found){
+            res.json(noRecordErr)
+        } else if(found && found.points - transaction.points > 0){
+            //subtract final values from balances in db
+            found.points += transaction.points 
+        }
+
+       })
        
-        
-        //while points are greater than 0
-        while(points >= 0 && i <= sortedTransactions.length -1){
+       //check balances in DB after transactions
+       balances.forEach(x => x.points < 0 ? res.json(noBalanceErr) : x)
+       //if below 0, throw err, break
 
-        //declare variable to find payer in balance array
-        let balancePayer = db.balances.find(balance => balance.payer === sortedTransactions[i].payer) 
-        
-        //check if points are less than current sortedTransaction
-        if(points < sortedTransactions[i].points){
-            
-            //if yes
-            //add new transaction for the withdrawal
-            const withdrawal = new Transaction(sortedTransactions[i].payer, (0-points))
-            
-            //subtract points from balancePayer
-            balancePayer.points -= points
-            
-            //push transaction to withdrawal array
-            withdrawals.push(withdrawal)
-            
-            //push transaction to db.transactions array
-            db.transactions.push(withdrawal)
-            
-            //set points to 0
-            points = 0
-            
-            //end loop 
-            break;
+      
+        //if total still has points after looping 
+        if(total > 0){
+        //send an error as response
+            res.json(noBalanceErr)
         } else {
-        //subtract points from earliest transaction in sortedTransactions
-        points -= sortedTransactions[i].points
-        
-        //and subtract transaction points from parallel balance payer
-        balancePayer.points -= sortedTransactions[i].points;
-        
-        //create new Transaction
-        const withdrawal = new Transaction(sortedTransactions[i].payer, (0-sortedTransactions[i].points))
-        
-        //push to current transactions
-        withdrawals.push(withdrawal)
-        
-        //push to db transactions
-        db.transactions.push(withdrawal)
-        
-        //increment i
-        i++
+        //otherwise return final values
+        res.json(finalValues)
         }
-    }
-        
-        
 
-        //when total request points is 0, respond with spending transactions array
-        res.json(withdrawals)
-        //console.log(db.transactions)
-        console.log(db.transactions)
-        //if there's an error, return and console.log(err)
-        } catch(err) {
-            console.log(err);
-        }
     },
 
     //add get balance function
@@ -169,3 +183,5 @@ module.exports = {
         }
     }
 }
+
+

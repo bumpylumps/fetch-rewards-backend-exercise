@@ -1,6 +1,6 @@
 /*
     Since we aren't using an external database for this exercise, 
-    a db array is initalized to hold a record of our transactions 
+    a db object is initalized to hold a record of our transactions 
     and current points balances
 
 */
