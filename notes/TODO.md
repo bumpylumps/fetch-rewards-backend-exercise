@@ -70,9 +70,9 @@
             - copy the given url
         - open up your text editor of choice
         - navigate to the folder you would like to hold the repository in
-        - once in the proper folder, enter git clone https://github.com/bumpylumps/fetch-rewards-backend-exercise.git into  the terminal
-        - when that's finished downloading, enter npm install into the terminal to get the necessary dependencies
-        - once that's finished installing, enter npm start into the terminal
+        - once in the proper folder, enter "git clone https://github.com/bumpylumps/fetch-rewards-backend-exercise.git" into  the terminal
+        - when that's finished downloading, enter "npm install" into the terminal to get the necessary dependencies
+        - once that's finished installing, enter "npm start" into the terminal to get the server fired up
         - open up postman <-- provide link if needed
         - ADD TRANSACTION 
             -in postman, use first tab to add transactions to db
