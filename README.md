@@ -10,25 +10,55 @@ This backend-oriented application handles 3 types of server requests: adding a t
 
 ## How To Use It: 
 
-    1) First you'll need to get the code itself. My repo is hosted on github and can be found [here:](https://github.com/bumpylumps/fetch-rewards-backend-exercise)
-            - click on fork (in the upper right portion of the screen) to clone repo into your github
-            - on your forked repo, click on the green code dropdown menu
-            - copy the given url
-        - open up your text editor of choice
-        - navigate to the folder you would like to hold the repository in
-        - once in the proper folder, enter "git clone https://github.com/bumpylumps/fetch-rewards-backend-exercise.git" into  the terminal
-        - when that's finished downloading, enter "npm install" into the terminal to get the necessary dependencies
-        - once that's finished installing, enter "npm start" into the terminal to get the server fired up
-        - open up postman <-- provide link if needed
-        - ADD TRANSACTION 
-            -in postman, use first tab to add transactions to db
-            - set url tab to post
-            - use http://localhost:8000/api/addTransaction for address
-            - go to body tab
-            - click on raw item and use dropdown to set body to json format
-            - provide proper object to body {"payer" : <string>, "points": <int>}
-            - click send and recieve response object
-        - GET BALANCES
+First you'll need to get the code itself. My repo is hosted on github and can be found [here:](https://github.com/bumpylumps/fetch-rewards-backend-exercise)
+
+- click on fork (in the upper right portion of the screen) to clone repo into your github
+
+    ![github-fork](https://user-images.githubusercontent.com/89161501/199853102-45c59bb9-3a26-49b6-a595-f27f6bcdc396.JPG)
+
+- Go to  your forked repo, click on the green code dropdown menu and copy the given url
+
+    ![github-url](https://user-images.githubusercontent.com/89161501/199853160-9d3a97c8-01c0-4e8b-9265-c24e486a12e1.JPG)
+
+- open up your text editor of choice, and navigate to the folder you would like to hold the repository in
+
+- once in the proper folder, enter the url you got from github (here it is if it didn't copy ->) https://github.com/bumpylumps/fetch-rewards-backend-exercise.git
+   and enter "git clone https://github.com/bumpylumps/fetch-rewards-backend-exercise" into your terminal
+   
+- when that's finished downloading, enter "npm install" into the terminal to get the necessary dependencies
+
+- once that's finished installing, enter "npm start" into the terminal to get the server fired up
+
+# Once you are all set locally:
+
+- open up postman, you can get it from [here](https://www.postman.com/) if you haven't already
+        
+
+# To make necessary requests: 
+
+ADD TRANSACTION 
+***
+-in postman, use first tab to add transactions to db:
+    
+
+   1) set url tab to post
+    
+   2) use http://localhost:8000/api/addTransaction for address
+    
+   3) go to body tab
+   
+   4) click on raw item and use dropdown to set body to json format
+     
+   5) provide proper object to body {"payer" : <string>, "points": <int>}
+    
+    ![postman-addTransaction](https://user-images.githubusercontent.com/89161501/199854154-eec44816-689c-4331-a7e1-a3f2a8dafe09.JPG)
+    
+   6) click send and recieve response object
+    
+    ![postman-addTransaction-results](https://user-images.githubusercontent.com/89161501/199854286-f90e008a-fe83-4654-9289-b7917827ffbb.JPG)
+    
+    
+    GET BALANCES
             - in postman, open a new tab
             - set url tab to get
             - use http://localhost:8000/api/getBalance for address
