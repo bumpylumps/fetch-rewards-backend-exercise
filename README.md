@@ -117,7 +117,7 @@ This was a great exercise in backend coding, especially for setting up servers, 
 
 
 ## Optimizations
-Given more time I would dive into the runtimes for my controller functions, and clean them up a bit. I would also do some more edge casing to tighten up those functions (spendPoints in particular). It would also be fun to build out a simple frontend to interact with rather than relying on server routes and Postman. I would also get it hosted. 
+Given more time I would dive into the runtimes for my controller functions, and clean them up a bit. I would also do some more edge casing to tighten up those functions (spendPoints in particular). It would also be fun to build out a simple frontend to interact with rather than relying on server routes and Postman. I would also get it hosted. Also, right now if there's something that will make balances negative, an error object is sent instead of the normal response and the app will crash. It would be nice to tighten up that edge and build a function that checks those balances and handles them without breaking the app. 
 
 ## Lessons Learned:
 I learn from everything I build! For this application I got way more comfortable with objects and manipulating their keys and values into different formats. I also sharpened up my logic skills, and had alot of fun building a simulated database to hold those objects while the server was live. 
