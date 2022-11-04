@@ -41,20 +41,20 @@ ADD TRANSACTION
 In Postman, use the first tab to add transactions to db. There should be one automatically open when starting Postman:
     
 
-   1) set url tab to post
+   1) set the url tab to "POST"
     
-   2) use http://localhost:8000/api/addTransaction for address
+   2) Enter http://localhost:8000/api/addTransaction into the address bar
     
-   3) go to body tab
+   3) go to the "body" tab
    
-   4) click on raw item and use dropdown to set body to json format
+   4) click on the "raw" item and use the dropdown menu on the left to set your request body to the "JSON" format
      
-   5) provide properly formatted object to body {"payer" : (string), "points": (int)}
+   5) provide properly formatted object to the body area -> {"payer" : (string), "points": (int)}
     
  ![postman-addTransaction](https://user-images.githubusercontent.com/89161501/199855099-6e8c9127-969b-4b4f-8d28-83610e7a9d93.JPG)
 
     
-   6) click send and recieve response object
+   6) click "Send" and recieve response object
     
 ![postman-addTransaction-results](https://user-images.githubusercontent.com/89161501/199855193-ea2acee7-d186-425f-b78d-fce3441e2a53.JPG)
     
@@ -66,15 +66,15 @@ In Postman, open a new tab
 ![postman-new-tab](https://user-images.githubusercontent.com/89161501/199855611-6fc76743-6715-4110-86fc-8ee15d426056.JPG)
     
     
-1) Set the url area in your new tab to GET using the dropdown menu on the left
+1) Set the url area in your new tab to "GET" using the dropdown menu on the left
 
-2)  Use http://localhost:8000/api/getBalance for the address
+2)  Enter http://localhost:8000/api/getBalance into the address bar
 
 
  
 ![postman-getBalance](https://user-images.githubusercontent.com/89161501/199855947-6a45e3e2-c867-49c3-b3a5-a6c5e310f1bb.JPG)
 	
-3) click send and recieve response object (balances)
+3) click "Send" and recieve response object
 	
 	
 ![postman-getBalance-results](https://user-images.githubusercontent.com/89161501/199856000-d346cc43-bff8-40a8-ba30-270ab59447e0.JPG)
@@ -88,19 +88,19 @@ In Postman, open a new tab:
 	
 ![postman-new-tab](https://user-images.githubusercontent.com/89161501/199856263-5484d0a0-cd13-4c85-8dd5-53d42a45beeb.JPG)
 
-1) set url tab to the left of address bar to post
+1) set url tab to the left of address bar to "POST"
 
-2) use http://localhost:8000/api/spendPoints for an address
+2) enter http://localhost:8000/api/spendPoints in the address bar
 
-3) go to body tab and select the raw option
+3) go to the "body" tab and select the "raw" option
 
-4) using the blue dropdown menu on the right, select JSON
+4) using the blue dropdown menu on the right, set your body request format to "JSON"
 
-5) add properly formatted object to request body: ({"points": (int) })
+5) add properly formatted object into the request body area: ({"points": (int) })
 	
 ![postman-spendPoints](https://user-images.githubusercontent.com/89161501/199856552-9340fc69-d459-4223-815b-e23ea2aaf283.JPG)
 
-6) click on send and recieve body object
+6) click on "Send" and recieve response object
 
 ![postman-spendPoints-results](https://user-images.githubusercontent.com/89161501/199856716-4a4f9916-b6d4-45a9-9759-779cfe24cf29.JPG)
 
