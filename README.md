@@ -22,7 +22,7 @@ First you'll need to get the code itself. My repo is hosted on github and can be
 
 - open up your text editor of choice, and navigate to the folder you would like to hold the repository in
 
-- once in the proper folder, enter the url you got from github (here it is if it didn't copy -> https://github.com/bumpylumps/fetch-rewards-backend-exercise.git )
+- once in the proper folder, take the url you got from github (here it is if it didn't copy -> https://github.com/bumpylumps/fetch-rewards-backend-exercise.git )
    and enter "git clone https://github.com/bumpylumps/fetch-rewards-backend-exercise" into your terminal
    
 - when that's finished downloading, enter "npm install" into the terminal to get the necessary dependencies
