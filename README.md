@@ -38,7 +38,7 @@ First you'll need to get the code itself. My repo is hosted on github and can be
 
 ADD TRANSACTION 
 ***
-In Postman, use first tab to add transactions to db:
+In Postman, use the first tab to add transactions to db. There should be one automatically open when starting Postman:
     
 
    1) set url tab to post
