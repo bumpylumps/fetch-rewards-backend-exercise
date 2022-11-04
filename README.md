@@ -31,14 +31,14 @@ First you'll need to get the code itself. My repo is hosted on github and can be
 
 # Once you are all set locally:
 
-- open up postman, you can get it from [here](https://www.postman.com/) if you haven't already
+- open up Postman, you can get it from [here](https://www.postman.com/) if you haven't already
         
 
 # To make necessary requests: 
 
 ADD TRANSACTION 
 ***
--in postman, use first tab to add transactions to db:
+-in Postman, use first tab to add transactions to db:
     
 
    1) set url tab to post
@@ -49,42 +49,84 @@ ADD TRANSACTION
    
    4) click on raw item and use dropdown to set body to json format
      
-   5) provide proper object to body {"payer" : <string>, "points": <int>}
+   5) provide properly formatted object to body {"payer" : (string), "points": (int)}
     
-    ![postman-addTransaction](https://user-images.githubusercontent.com/89161501/199854154-eec44816-689c-4331-a7e1-a3f2a8dafe09.JPG)
+ ![postman-addTransaction](https://user-images.githubusercontent.com/89161501/199855099-6e8c9127-969b-4b4f-8d28-83610e7a9d93.JPG)
+
     
    6) click send and recieve response object
     
-    ![postman-addTransaction-results](https://user-images.githubusercontent.com/89161501/199854286-f90e008a-fe83-4654-9289-b7917827ffbb.JPG)
+![postman-addTransaction-results](https://user-images.githubusercontent.com/89161501/199855193-ea2acee7-d186-425f-b78d-fce3441e2a53.JPG)
     
     
-    GET BALANCES
-            - in postman, open a new tab
-            - set url tab to get
-            - use http://localhost:8000/api/getBalance for address
-            - click send and recieve response object (balances)
-        - SPEND POINTS
-            - in postman, open a new tab
-            - set url tab to post
-            - use http://localhost:8000/api/spendPoints for address
-            - go to body tab
-            - click on raw item and use dropdown to set body to json format
-            - provide proper object to body {"points": <int>}
-            - click on send and recieve body object
+GET BALANCES
+***
+In Postman, open a new tab
+    
+![postman-new-tab](https://user-images.githubusercontent.com/89161501/199855611-6fc76743-6715-4110-86fc-8ee15d426056.JPG)
+    
+    
+1) Set the url area in your new tab to GET using the dropdown menu on the left
 
+2)  Use http://localhost:8000/api/getBalance for the address
+
+
+ 
+![postman-getBalance](https://user-images.githubusercontent.com/89161501/199855947-6a45e3e2-c867-49c3-b3a5-a6c5e310f1bb.JPG)
+	
+3) click send and recieve response object (balances)
+	
+	
+![postman-getBalance-results](https://user-images.githubusercontent.com/89161501/199856000-d346cc43-bff8-40a8-ba30-270ab59447e0.JPG)
+
+
+	
+SPEND POINTS
+***
+
+In Postman, open a new tab: 
+	
+![postman-new-tab](https://user-images.githubusercontent.com/89161501/199856263-5484d0a0-cd13-4c85-8dd5-53d42a45beeb.JPG)
+
+1) set url tab to the left of address bar to post
+
+2) use http://localhost:8000/api/spendPoints for an address
+
+3) go to body tab and select the raw option
+
+4) using the blue dropdown menu on the right, select JSON
+
+5) add properly formatted object to request body: ({"points": (int) })
+	
+![postman-spendPoints](https://user-images.githubusercontent.com/89161501/199856552-9340fc69-d459-4223-815b-e23ea2aaf283.JPG)
+
+6) click on send and recieve body object
+
+![postman-spendPoints-results](https://user-images.githubusercontent.com/89161501/199856716-4a4f9916-b6d4-45a9-9759-779cfe24cf29.JPG)
+
+** This should cover everything the app needs to do, feel free to reach out if you have any comments, questions, or concerns!
+
+
+***
 
 ## How It's Made:
 
-**Tech used:**  JavaScript, Express
+**Tech used:**  JavaScript, Express, Node, Nodemon
 
-This was a great exercise in backend coding, especially for setting up servers, routes and server requests. Building the routes and controllers was pretty straightforward, but it was fun and creative to find a way to simulate a database without using MongoDB. The functions inside of the controller took alot of finessing to get just right, but it was very creatively engaging to swap the data between objects and arrays. I attempted to cover all the edge cases I could, but would need some more input to feel more comfortable with the durability of the functions. 
+This was a great exercise in backend coding, especially for setting up servers, routes and server requests. Building the routes and controllers was pretty straightforward, but it was fun and creative to find a way to simulate a database without using MongoDB. Nodemon was also used to keep the server running during changes to save time during development. The functions inside of the controller took alot of finessing to get just right, but it was very creatively engaging to swap the data between objects and arrays. I attempted to cover all the edge cases I could, but would need some more input to feel more comfortable with the durability of the functions.  
 
 
 ## Optimizations
 Given more time I would dive into the runtimes for my controller functions, and clean them up a bit. I would also do some more edge casing to tighten up those functions (spendPoints in particular). It would also be fun to build out a simple frontend to interact with rather than relying on server routes and Postman. I would also get it hosted. 
 
 ## Lessons Learned:
-I learn from everything I build. For this application I got way more comfortable with objects and manipulating their keys and values into different formats. I also sharpened up my logic skills, and had alot of fun building a simulated database to hold those objects while the server was live. 
+I learn from everything I build! For this application I got way more comfortable with objects and manipulating their keys and values into different formats. I also sharpened up my logic skills, and had alot of fun building a simulated database to hold those objects while the server was live. 
 
+## Thank you!
 
+Thanks for taking the time to read through this README! For more info on me, or to reach out with questions, comments or concerns, you can find me at: 
+
+* Email - alexander.fulop.art@gmail.com
+* Twitter - [@alayfalupe](https://twitter.com/alayfalupe)
+* Website - www.bumpsites.com
 
